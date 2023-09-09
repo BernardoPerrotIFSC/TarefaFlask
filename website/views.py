@@ -6,7 +6,6 @@ from .models import Tarefa
 
 views = Blueprint('views', __name__)
 
-@views.route('/')
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
