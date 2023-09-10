@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_required, current_user
+import json
 
 from website import db
 from .models import Tarefa
@@ -9,13 +10,20 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+
     if request.method == 'POST':
         tarefa = request.form.get('tarefa')
-
+        concluida = request.form.get('concluida')
+        afazer = request.form.get('afazer')
+        if concluida == 'marcada':
+            concluida = 'Concluída'
+        if afazer == 'marcada':
+            afazer = 'A fazer'
+            
         if len(tarefa) < 1:
-            flash('Texto da nota é muito curto!', category='error')
+            flash('Texto da tarefa é muito curto!', category='error')
         else:
-            nova_tarefa = Tarefa(texto=tarefa, usuario_id=current_user.id)
+            nova_tarefa = Tarefa(texto=tarefa, usuario_id=current_user.id, status = afazer or concluida)
             db.session.add(nova_tarefa)
             db.session.commit()
             flash("Nota incluída!", category="success")
@@ -24,7 +32,7 @@ def home():
     return render_template("home.html", usuario=current_user)
 
 @views.route('/delete-Tarefa', methods=['POST'])
-def delete_nota():
+def delete_tarefa():
     data = json.loads(request.data)
     tarefa_id = data['tarefaId']
     tarefa = Tarefa.query.get(tarefa_id)
