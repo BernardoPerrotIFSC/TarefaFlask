@@ -15,15 +15,20 @@ def home():
         tarefa = request.form.get('tarefa')
         concluida = request.form.get('concluida')
         afazer = request.form.get('afazer')
-        if concluida == 'marcada':
+        nenhum = request.form.get('nenhum')
+        if concluida == 'concluida':
             concluida = 'Concluída'
-        if afazer == 'marcada':
+        elif afazer == 'afazer':
             afazer = 'A fazer'
+        elif nenhum == 'nenhum':
+            nenhum = 'Nenhum'
+        else:
+            nenhum = 'Nenhum'
             
         if len(tarefa) < 1:
             flash('Texto da tarefa é muito curto!', category='error')
         else:
-            nova_tarefa = Tarefa(texto=tarefa, usuario_id=current_user.id, status = afazer or concluida)
+            nova_tarefa = Tarefa(texto=tarefa, usuario_id=current_user.id, status = afazer or concluida or nenhum)
             db.session.add(nova_tarefa)
             db.session.commit()
             flash("Nota incluída!", category="success")
@@ -31,11 +36,6 @@ def home():
     
     return render_template("home.html", usuario=current_user)
 
-# @views.route('/alterar-Tarefa', methods=['POST', 'GET'])
-# def altera_tarefa():
-#     concluida = request.form.get('concluida2')
-#     afazer = request.form.get('afazer2')
-#     if concluida == 'marcada':
 
 
 @views.route('/delete-Tarefa', methods=['POST'])
@@ -72,6 +72,19 @@ def altera_afazer():
             tarefa.status = 'A fazer'
             db.session.commit()
             flash('Alterado o status', category = 'success')
+
+
+@views.route('/altera-nenhum', methods=['POST'])
+def altera_nenhum():
+    data = json.loads(request.data)
+    tarefa_id = data['tarefaId']
+    tarefa = Tarefa.query.get(tarefa_id)
+    if tarefa:
+        if tarefa.usuario_id == current_user.id:
+            tarefa.status = 'Nenhum'
+            db.session.commit()
+            flash('Altera o status', category= 'success')
+
 
 
         

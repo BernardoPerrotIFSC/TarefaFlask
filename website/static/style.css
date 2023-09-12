@@ -1,0 +1,14 @@
+#botao{
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.10);
+    font-family: 'Arial, Helvetica, sans-serif'            
+}
+#botao:hover{
+    background-color: lightgreen;
+    border: none;
+    font-size: 1.2em;
+}
+.tarefas{
+    background-color: gray;
+    border-radius: 20px;
+}

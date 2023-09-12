@@ -22,3 +22,11 @@ function alteraAfazer(tarefaId) {
         window.location.href ="/"
     })
 }
+function alteraNenhum(tarefaId) {
+    fetch("/altera-nenhum", {
+        method:"POST",
+        body: JSON.stringify({tarefaId: tarefaId}),
+    }).then(()=> {
+        window.location.href ="/"
+    })
+}
