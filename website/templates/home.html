@@ -4,17 +4,18 @@
 
 {% block content %}
 <h1 class="text-center">Tarefas</h1>
+<h2>Escreva sua tarefa:</h2>
 <form method="POST">
     <textarea name="tarefa" id="tarefa" class="form-control my-3"></textarea>
-    <div class="form-check">
+    <div class="form-check" id="afazer">
         <input type="checkbox" name="afazer" class="form-check-input" id="afazer" value="afazer">
         <label class="form-check-label" for="afazer">A fazer</label>
     </div>
-    <div class="form-check">
+    <div class="form-check" id="concluida">
         <input type="checkbox" name="concluida" class="form-check-input" id="concluida" value="concluida">
         <label for="form-check-label" for="concluida">Concluída</label>
     </div>
-    <div class="form-check">
+    <div class="form-check" id="nenhum"> 
         <input type="checkbox" name="nenhum" class="form-check-input" id="nenhum" value="nenhum">
         <label for="form-check-label" form="nenhum">Nenhum</label>
     </div>
@@ -22,17 +23,32 @@
         <button type="submit" class="btn btn-primary">Adicionar Tarefa</button>
     </div>
 </form>
-<ul class="list-group list-group-flush" id="tarefas">
+<!-- <ul class="list-group list-group-flush" id="tarefas">
     <h2>Lista de tarefas</h2>
-    <h3>filtro</h3>
-    <div>
+    <h3>filtrar por:</h3>
+    
+    <form action="" method="POST">
         <input type="checkbox" name="filtro-afazer" id="botao-filtro" value="afazer">
         <label for="concluida">A fazer</label>
         <input type="checkbox" name="filtro-concluido" id="botao-filtro" value="concluida">
         <label for="concluida">Concluída</label>
         <input type="checkbox" name="filtro-nenhum" id="botao-filtro" value="nenhum">
-    </div>
-    {% for tarefa in usuario.tarefas %}
+        <label for="nenhum">Nenhum</label>
+        <input type="checkbox" name="filtro-todas" id="botao-filtro" value="todas">
+        <label for="todas">Todas</label>
+        <button id="botao">filtrar</button>
+    </form> -->
+    
+    <!-- <form id="filter-form">
+        <label for="concluidas">Concluídas</label>
+        <input type="checkbox" id="concluidas" name="concluidas" value="Concluídas">
+        
+        <label for="afazer">A fazer</label>
+        <input type="checkbox" id="afazer" name="afazer" value="A fazer">
+        
+        <button type="submit">Filtrar</button>
+    </form> -->
+    <!-- {% for tarefa in usuario.tarefas %}
     <div class="tarefas">
         <li>
             {{ tarefa.texto }}
@@ -45,8 +61,45 @@
     </div>
     {% else %}  
         <li>Nenhuma tarefa cadastrada.</li>
+    {% endfor %} -->
+    {% for tarefa in usuario.tarefas %}
+        {% if tarefa.status == 'A fazer' %}
+            <div class="tarefas_afazer">
+                <li>
+                    {{ tarefa.texto }}
+                    <p>Status: {{ tarefa.status}}</p> 
+                    <button type="button" onClick="alteraConcluido({{tarefa.id}})" id="botao">Concluída</button>
+                    <button type="button" onClick="alteraAfazer({{tarefa.id}})" id="botao">A fazer</button>
+                    <button type="button" onClick="alteraNenhum" id="botao">Nenhum</button>
+                    <button type="button" onClick="deleteTarefa({{ tarefa.id }})" id="botao">Excluir tarefa</button>
+                </li>
+            </div>
+        {% elif tarefa.status == 'Concluída' %}
+            <div class="tarefas_concluida">
+                <li>
+                    {{ tarefa.texto }}
+                    <p>Status: {{ tarefa.status}}</p> 
+                    <button type="button" onClick="alteraConcluido({{tarefa.id}})" id="botao">Concluída</button>
+                    <button type="button" onClick="alteraAfazer({{tarefa.id}})" id="botao">A fazer</button>
+                    <button type="button" onClick="alteraNenhum" id="botao">Nenhum</button>
+                    <button type="button" onClick="deleteTarefa({{ tarefa.id }})" id="botao">Excluir tarefa</button>
+                </li>
+            </div>
+        {% elif tarefa.status == 'Nenhum' %}
+            <div class="tarefas_nenhum">
+                <li>
+                    {{ tarefa.texto }}
+                    <p>Status: {{ tarefa.status}}</p> 
+                    <button type="button" onClick="alteraConcluido({{tarefa.id}})" id="botao">Concluída</button>
+                    <button type="button" onClick="alteraAfazer({{tarefa.id}})" id="botao">A fazer</button>
+                    <button type="button" onClick="alteraNenhum" id="botao">Nenhum</button>
+                    <button type="button" onClick="deleteTarefa({{ tarefa.id }})" id="botao">Excluir tarefa</button>
+                </li>
+            </div>
+        {% endif %}
+    {% else %}  
+        <li>Nenhuma tarefa cadastrada.</li>
     {% endfor %}
-    
 </ul>
 
 {% endblock %}
