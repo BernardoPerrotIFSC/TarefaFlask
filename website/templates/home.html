@@ -19,10 +19,18 @@
     </div>
 </form>
 <ul class="list-group list-group-flush" id="tarefas">
+
+    <h3>filtro</h3>
+    <div>
+        <input type="checkbox" name="filtro-afazer" id="afazer" value="afazer">
+        <label for="concluida">A fazer</label>
+        <input type="checkbox" name="filtro-concluido" id="concluida" value="concluida">
+        <label for="concluida">Concluida</label>
+    </div>
     {% for tarefa in usuario.tarefas %}
         <li class="list-group-item">
             {{ tarefa.texto }}
-            {{ tarefa.data}}
+            <!-- {{ tarefa.data}} -->
             {{ tarefa.status}}
             <button type="button" onClick="alteraConcluido({{tarefa.id}})">concluido</button>
             <button type="button" onClick="alteraAfazer({{tarefa.id}})">A fazer</button>

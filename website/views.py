@@ -57,7 +57,7 @@ def altera_concluido():
     tarefa = Tarefa.query.get(tarefa_id)
     if tarefa:
         if tarefa.usuario_id == current_user.id:
-            tarefa.status = 'concluida'
+            tarefa.status = 'Concluída'
             db.session.commit()
             flash('Alterado o status', catgory = 'success')
 
@@ -69,6 +69,10 @@ def altera_afazer():
     tarefa = Tarefa.query.get(tarefa_id)
     if tarefa:
         if tarefa.usuario_id == current_user.id:
-            tarefa.status = 'a fazer'
+            tarefa.status = 'A fazer'
             db.session.commit()
-            flash('Alterado o status', catgory = 'success')
+            flash('Alterado o status', category = 'success')
+
+
+        
+
