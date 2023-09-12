@@ -31,6 +31,13 @@ def home():
     
     return render_template("home.html", usuario=current_user)
 
+# @views.route('/alterar-Tarefa', methods=['POST', 'GET'])
+# def altera_tarefa():
+#     concluida = request.form.get('concluida2')
+#     afazer = request.form.get('afazer2')
+#     if concluida == 'marcada':
+
+
 @views.route('/delete-Tarefa', methods=['POST'])
 def delete_tarefa():
     data = json.loads(request.data)
@@ -42,3 +49,26 @@ def delete_tarefa():
             db.session.commit()
             flash("Tarefa excluída!", category="success")
     return jsonify({})
+
+@views.route('/altera-concluido', methods=['POST'])
+def altera_concluido():
+    data = json.loads(request.data)
+    tarefa_id = data['tarefaId']
+    tarefa = Tarefa.query.get(tarefa_id)
+    if tarefa:
+        if tarefa.usuario_id == current_user.id:
+            tarefa.status = 'concluida'
+            db.session.commit()
+            flash('Alterado o status', catgory = 'success')
+
+
+@views.route('/altera-afazer', methods=['POST'])
+def altera_afazer():
+    data = json.loads(request.data)
+    tarefa_id = data['tarefaId']
+    tarefa = Tarefa.query.get(tarefa_id)
+    if tarefa:
+        if tarefa.usuario_id == current_user.id:
+            tarefa.status = 'a fazer'
+            db.session.commit()
+            flash('Alterado o status', catgory = 'success')

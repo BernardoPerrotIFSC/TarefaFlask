@@ -24,10 +24,8 @@
             {{ tarefa.texto }}
             {{ tarefa.data}}
             {{ tarefa.status}}
-            <input type="checkbox" name="concluida2" id="concluida2" value="concluida2">
-            <label for="form-check-label" for="concluida2">Concluida</label>
-            <input type="checkbox" name="afzer2" id="afzer2" value="afazer2">
-            <label for="form-check-label" for="afazer2">A fazer</label>
+            <button type="button" onClick="alteraConcluido({{tarefa.id}})">concluido</button>
+            <button type="button" onClick="alteraAfazer({{tarefa.id}})">A fazer</button>
             <button type="button" class="close" onClick="deleteTarefa({{ tarefa.id }})">
                 <span aria-hidden="true">&times;</span>
             </button>
