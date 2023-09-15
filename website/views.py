@@ -48,6 +48,7 @@ def home():
 
 
 @views.route('/delete-Tarefa', methods=['POST'])
+@login_required
 def delete_tarefa():
     data = json.loads(request.data)
     #rebebe o sinal de que o botao de excluir foi acionado
@@ -63,6 +64,7 @@ def delete_tarefa():
     return jsonify({})
 
 @views.route('/altera-concluido', methods=['POST'])
+@login_required
 def altera_concluido():
     data = json.loads(request.data)
     #rebebe o sinal de que o botao foi acionado
@@ -78,6 +80,7 @@ def altera_concluido():
 
 
 @views.route('/altera-afazer', methods=['POST'])
+@login_required
 def altera_afazer():
     data = json.loads(request.data)
     #rebebe o sinal de que o botao foi acionado
@@ -93,6 +96,7 @@ def altera_afazer():
 
 
 @views.route('/altera-nenhum', methods=['POST'])
+@login_required
 def altera_nenhum():
     data = json.loads(request.data)
     #rebebe o sinal de que o botao foi acionado
@@ -107,6 +111,10 @@ def altera_nenhum():
             flash('Altera o status', category= 'success')
 
 
+
+
+   
+    
 
 
 

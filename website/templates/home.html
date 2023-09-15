@@ -23,45 +23,7 @@
         <button type="submit" class="btn btn-primary">Adicionar Tarefa</button>
     </div>
 </form>
-<!-- <ul class="list-group list-group-flush" id="tarefas">
-    <h2>Lista de tarefas</h2>
-    <h3>filtrar por:</h3>
-    
-    <form action="" method="POST">
-        <input type="checkbox" name="filtro-afazer" id="botao-filtro" value="afazer">
-        <label for="concluida">A fazer</label>
-        <input type="checkbox" name="filtro-concluido" id="botao-filtro" value="concluida">
-        <label for="concluida">Concluída</label>
-        <input type="checkbox" name="filtro-nenhum" id="botao-filtro" value="nenhum">
-        <label for="nenhum">Nenhum</label>
-        <input type="checkbox" name="filtro-todas" id="botao-filtro" value="todas">
-        <label for="todas">Todas</label>
-        <button id="botao">filtrar</button>
-    </form> -->
-    
-    <!-- <form id="filter-form">
-        <label for="concluidas">Concluídas</label>
-        <input type="checkbox" id="concluidas" name="concluidas" value="Concluídas">
-        
-        <label for="afazer">A fazer</label>
-        <input type="checkbox" id="afazer" name="afazer" value="A fazer">
-        
-        <button type="submit">Filtrar</button>
-    </form> -->
-    <!-- {% for tarefa in usuario.tarefas %}
-    <div class="tarefas">
-        <li>
-            {{ tarefa.texto }}
-            <p>Status: {{ tarefa.status}}</p> 
-            <button type="button" onClick="alteraConcluido({{tarefa.id}})" id="botao">Concluída</button>
-            <button type="button" onClick="alteraAfazer({{tarefa.id}})" id="botao">A fazer</button>
-            <button type="button" onClick="alteraNenhum" id="botao">Nenhum</button>
-            <button type="button" onClick="deleteTarefa({{ tarefa.id }})" id="botao">Excluir tarefa</button>
-        </li>
-    </div>
-    {% else %}  
-        <li>Nenhuma tarefa cadastrada.</li>
-    {% endfor %} -->
+
     {% for tarefa in usuario.tarefas %}
         {% if tarefa.status == 'A fazer' %}
             <div class="tarefas_afazer">

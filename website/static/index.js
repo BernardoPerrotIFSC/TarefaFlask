@@ -30,20 +30,3 @@ function alteraNenhum(tarefaId) {
         window.location.href ="/"
     })
 }
-
-const filterForm = document.getElementById('filter-form');
-
-filterForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(filterForm);
-    const response = await fetch('/filtrar', {
-        method: 'POST',
-        body: formData,
-    });
-
-    if (response.ok) {
-        const data = await response.text();
-        document.body.innerHTML = data;
-    }
-});
