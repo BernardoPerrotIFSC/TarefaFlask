@@ -76,7 +76,7 @@ def altera_concluido():
         if tarefa.usuario_id == current_user.id:
             tarefa.status = 'Concluída'
             db.session.commit()
-            flash('Alterado o status', catgory = 'success')
+            flash('Alterado o status', category = 'success')
 
 
 @views.route('/altera-afazer', methods=['POST'])
